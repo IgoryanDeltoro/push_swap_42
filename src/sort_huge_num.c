@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_big_num.c                                     :+:      :+:    :+:   */
+/*   sort_huge_num.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igoryan <igoryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 03:40:09 by igoryan           #+#    #+#             */
-/*   Updated: 2024/11/20 01:06:52 by igoryan          ###   ########.fr       */
+/*   Updated: 2024/11/20 02:36:03 by igoryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
 int get_min(t_list *lst)
 {
     int smallest;
@@ -26,63 +27,75 @@ int get_min(t_list *lst)
 }
 
 
-void swap(int *a, int *b) 
-{
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
-
 int partition(int arr[], int low, int high) 
 {
-    int pivot = arr[high]; 
-    int i = low - 1;      
-
-    for (int j = low; j < high; j++) 
+    int pivot;
+    int i;
+    int j;
+     
+    j = low;
+    i = low - 1;
+    pivot = arr[high];
+    while (j < high) 
     {
         if (arr[j] <= pivot) {
             i++;
-            swap(&arr[i], &arr[j]); 
+            ft_swap(&arr[i], &arr[j]); 
         }
+        j++;
     }
-    swap(&arr[i + 1], &arr[high]); 
+    ft_swap(&arr[i + 1], &arr[high]); 
     return i + 1;                  
 }
 
 
 void quicksort(int arr[], int low, int high) 
 {
+    int partions;
+    
     if (low < high) 
     {
-        int pi = partition(arr, low, high);
+        partions = partition(arr, low, high);
 
-        quicksort(arr, low, pi - 1);
-        quicksort(arr, pi + 1, high);
+        quicksort(arr, low, partions - 1);
+        quicksort(arr, partions + 1, high);
     }
 }
 
-int *pre_sort(t_list *head, int size) 
+int *pre_sort(t_list *lst, int size) 
 {
-    int *values = malloc(size * sizeof(int));
+    t_list *current;
+    int *values;
+    int i;
+    
+    values = malloc(size * sizeof(int));
     if (!values)
-        return NULL; 
-    t_list *current = head;
-    for (int i = 0; i < size && current != NULL; i++) 
+        return NULL;
+    i = 0;
+    current = lst;
+    while (i < size && current != NULL) 
     {
         values[i] = current->data;
         current = current->next;
+        i++;
     }
     quicksort(values, 0, size -1);
     return values; 
 }
 
-void reinsert_sorted(t_list **a, t_list **b) {
-    while (*b) 
+void reinsert_of_sorted(t_list **lst_a, t_list **lst_b) 
+{
+    t_list *current;
+    t_list *max_node;
+    t_list *prev_max;
+    int max;
+    
+    while (*lst_b) 
     {
-        t_list *current = *b;
-        int max = current->data;
-        t_list *max_node = current;
-        t_list *prev_max = NULL;
+        current = *lst_b;
+        max = current->data;
+        max_node = current;
+        prev_max = NULL;
 
         while (current->next) 
         {
@@ -95,12 +108,12 @@ void reinsert_sorted(t_list **a, t_list **b) {
             current = current->next;
         }
         if (!prev_max) 
-            ft_pa(a, b);
+            ft_pa(lst_a, lst_b);
         else 
         {
             prev_max->next = max_node->next;
-            max_node->next = *a;
-            *a = max_node;
+            max_node->next = *lst_a;
+            *lst_a = max_node;
         }
     }
 }
@@ -119,7 +132,7 @@ void push_to_chunks(t_list **a, t_list **b, int *sorted, int size, int num_chunk
     while (*a) 
     {
         int value = (*a)->data;
-        while ( chunk < num_chunks) 
+        while ( chunk <= num_chunks) 
         {
             min = sorted[chunk * chunk_size];
             if (chunk == num_chunks)
@@ -143,27 +156,22 @@ void push_to_chunks(t_list **a, t_list **b, int *sorted, int size, int num_chunk
     }
 }
 
-int sort_big_num(t_list **lst_a, t_list **lst_b)
+int sort_huge_num(t_list **lst_a, t_list **lst_b)
 {
-    int size = (*lst_a)->argc - 1;
-    int *sorted = pre_sort(*lst_a, size);
+    int size;
+    int *sorted;
     int chunk;
     
     if (!(*lst_a) || !lst_a)
         return (0);
+    size = (*lst_a)->argc - 1;
+    sorted = pre_sort(*lst_a, size);
     if (size <= 100)
         chunk = 5;
-    if (size >= 101 && size <= 200)
-        chunk = 5;
-    if (size >= 201 && size <= 300)
-        chunk = 6;
-    if (size >= 301 && size <= 400)
-        chunk = 8;
-    if (size >= 401 && size <= 500)
+    if (size > 100 && size <= 500)
         chunk = 10;
-    
-    printf("chunk: %d\n", chunk);
     push_to_chunks(lst_a, lst_b, sorted, size, chunk);
-    reinsert_sorted(lst_a, lst_b);
+    reinsert_of_sorted(lst_a, lst_b);
+    free(sorted);
     return (1);
 }

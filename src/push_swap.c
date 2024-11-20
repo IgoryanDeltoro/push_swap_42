@@ -6,7 +6,7 @@
 /*   By: igoryan <igoryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:51:31 by ibondarc          #+#    #+#             */
-/*   Updated: 2024/11/20 00:40:18 by igoryan          ###   ########.fr       */
+/*   Updated: 2024/11/20 02:31:22 by igoryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int push_swap(t_list **lst_a, t_list **lst_b)
     return (1);
 }
 
-int    initial_stack(t_list **lst_a, int ac, char **av)
+static int    initial_stack(t_list **lst_a, int ac, char **av)
 {
     t_list  *temp;
     int     i;

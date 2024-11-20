@@ -6,7 +6,7 @@
 /*   By: igoryan <igoryan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:55:57 by ibondarc          #+#    #+#             */
-/*   Updated: 2024/11/19 18:52:22 by igoryan          ###   ########.fr       */
+/*   Updated: 2024/11/20 02:36:15 by igoryan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int					ft_strlen(const char *s);
 int					ft_strlcpy(char *dst, const char *src, int size);
 t_list				*ft_lstnew(int num, int ac);
 t_list				*ft_lstlast(t_list *lst);
+void 				ft_swap(int *a, int *b);
 ////                Actions
 void				ft_sa(t_list **lst_a);
 void				ft_sb(t_list **lst_b);
@@ -59,6 +60,6 @@ int 				find_index(t_list *lst);
 int 				sort_2_num(t_list **lst_a);
 int					sort_3_num(t_list **lst_a);
 int 				sort_4_6_num(t_list **lst_a, t_list **lst_b);
-int 				sort_big_num(t_list **lst_a, t_list **lst_b);
+int 				sort_huge_num(t_list **lst_a, t_list **lst_b);
 
 #endif
