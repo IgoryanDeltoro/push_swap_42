@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igoryan <igoryan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibondarc <ibondarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 10:55:57 by ibondarc          #+#    #+#             */
-/*   Updated: 2024/11/20 02:36:15 by igoryan          ###   ########.fr       */
+/*   Updated: 2024/12/04 11:00:23 by ibondarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,55 @@
 # define PUSH_SWAP_H
 
 # include <limits.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 
 typedef struct s_list
 {
-	int				argc;
-	int				idx;
-	int				data;
+	int				value;
+	int				curr_position;
+	int				push_cost;
+	int				before_median;
+	int				cheapest;
+	struct s_list	*prev;
 	struct s_list	*next;
+	struct s_list	*target_node;
 }					t_list;
 
 ///                 Utils
 int					ft_atoi(const char *nptr);
-int					ft_isdigit(int ac, char **av);
 int					ft_strcmp(char *s1, char *s2);
 int					ft_lstsize(t_list *lst);
 int					has_duplicate(t_list *lst, int new_value);
 int					ft_count_words(char const *s, char c);
-void				ft_lstadd_front(t_list **lst, t_list *new);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 void				ft_lstclean(t_list **lst);
 char				**ft_split(char const *s, char c);
 int					ft_strlen(const char *s);
 int					ft_strlcpy(char *dst, const char *src, int size);
-t_list				*ft_lstnew(int num, int ac);
+t_list				*ft_lstnew(int num);
 t_list				*ft_lstlast(t_list *lst);
-void 				ft_swap(int *a, int *b);
 ////                Actions
-void				ft_sa(t_list **lst_a);
-void				ft_sb(t_list **lst_b);
-void				ft_ss(t_list **lst_a, t_list **lst_b);
-void				ft_ra(t_list **lst_a);
-void				ft_rb(t_list **lst_b);
-void				ft_rr(t_list **lst_a, t_list **lst_b);
-void				ft_rra(t_list **lst_a);
-void				ft_rrb(t_list **lst_b);
-void				ft_rrr(t_list **lst_a, t_list **lst_b);
-void    			ft_pa(t_list **lst_a, t_list **lst_b);
-void    			ft_pb(t_list **lst_a, t_list **lst_b);
-void				rotate_to_top(t_list **lst_a, int index);
-int 				find_index(t_list *lst);
+void				swap_node(t_list **stack, char *str, bool flag);
+void				rotate_node(t_list **stack, char *str, bool flag);
+void				reverse_rotate_node(t_list **stack, char *str, bool flag);
+void				push_node(t_list **stack_1, t_list **stack_2, char *str,
+						bool flag);
+void				handle_actions(t_list **stack_a, t_list **stack_b,
+						char *str);
+void				print_actions(char *str);
+void				rotate_smallest(t_list **stack_a, t_list **stack_b,
+						t_list *smallest);
+void				move_nodes(t_list **stack_a, t_list **stack_b);
+int					is_stack_sorted(t_list *stack);
+void				set_curr_position(t_list *stack);
+t_list				*get_smallest(t_list *stack);
+t_list				*get_cheapest(t_list *stack);
 ////                Handlers
-int 				sort_2_num(t_list **lst_a);
-int					sort_3_num(t_list **lst_a);
-int 				sort_4_6_num(t_list **lst_a, t_list **lst_b);
-int 				sort_huge_num(t_list **lst_a, t_list **lst_b);
+void				sort_2_num(t_list **stack_a, t_list **stack_b);
+void				sort_3_num(t_list **stack_a, t_list **stack_b);
+void				sort_huge_num(t_list **stack_a, t_list **stack_b);
 
 #endif

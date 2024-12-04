@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   print_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibondarc <ibondarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 15:48:25 by ibondarc          #+#    #+#             */
-/*   Updated: 2024/11/13 15:50:08 by ibondarc         ###   ########.fr       */
+/*   Created: 2024/12/02 16:09:07 by ibondarc          #+#    #+#             */
+/*   Updated: 2024/12/04 12:04:50 by ibondarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+static void	ft_putchar(char c)
 {
-	if (!new)
-		return ;
-	new->next = *lst;
-	*lst = new;
+	write(1, &c, 1);
+}
+
+void	print_actions(char *str)
+{
+	while (*str)
+	{
+		ft_putchar(*str);
+		str++;
+	}
+	ft_putchar('\n');
 }

@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sa.c                                            :+:      :+:    :+:   */
+/*   get_cheapest.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igoryan <igoryan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibondarc <ibondarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 01:37:38 by igoryan           #+#    #+#             */
-/*   Updated: 2024/11/15 20:30:42 by igoryan          ###   ########.fr       */
+/*   Created: 2024/11/27 16:09:57 by ibondarc          #+#    #+#             */
+/*   Updated: 2024/12/04 11:46:08 by ibondarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void    ft_sa(t_list **lst_a)
+t_list	*get_cheapest(t_list *stack)
 {
-    int temp;
-    
-    if (!lst_a || !(*lst_a) || !(*lst_a)->next)
-        return ;
-    printf("sa\n");
-    temp = (*lst_a)->data;
-    (*lst_a)->data = (*lst_a)->next->data;
-    (*lst_a)->next->data = temp;
+	if (!stack)
+		return (NULL);
+	while (stack)
+	{
+		if (stack->cheapest)
+			return (stack);
+		stack = stack->next;
+	}
+	return (NULL);
 }

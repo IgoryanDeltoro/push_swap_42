@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   has_duplicate.c                                    :+:      :+:    :+:   */
+/*   get_smallest.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibondarc <ibondarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 17:12:23 by ibondarc          #+#    #+#             */
-/*   Updated: 2024/12/04 10:56:04 by ibondarc         ###   ########.fr       */
+/*   Created: 2024/11/19 17:47:17 by ibondarc          #+#    #+#             */
+/*   Updated: 2024/12/04 11:46:28 by ibondarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	has_duplicate(t_list *stack, int new_value)
+t_list	*get_smallest(t_list *stack)
 {
+	long	smallest;
+	t_list	*smallest_node;
+
+	if (!stack)
+		return (NULL);
+	smallest = LONG_MAX;
 	while (stack != NULL)
 	{
-		if (stack->value == new_value)
-			return (1);
+		if (stack->value < smallest)
+		{
+			smallest = stack->value;
+			smallest_node = stack;
+		}
 		stack = stack->next;
 	}
-	return (0);
+	return (smallest_node);
 }

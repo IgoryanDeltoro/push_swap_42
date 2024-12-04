@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   sort_2_num.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igoryan <igoryan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibondarc <ibondarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 20:58:33 by igoryan           #+#    #+#             */
-/*   Updated: 2024/11/19 18:15:51 by igoryan          ###   ########.fr       */
+/*   Created: 2024/11/15 20:58:33 by ibondarc          #+#    #+#             */
+/*   Updated: 2024/12/04 11:45:52 by ibondarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int sort_2_num(t_list **lst_a)
+void	sort_2_num(t_list **stack_a, t_list **stack_b)
 {
-    if (!lst_a || !(*lst_a) || !(*lst_a)->next)
-        return (0);
-    if ((*lst_a)->data > (*lst_a)->next->data)
-        ft_sa(lst_a);
-    return (1);
+	if (!stack_a || !(*stack_a) || !(*stack_a)->next)
+		return ;
+	if ((*stack_a)->value > (*stack_a)->next->value)
+		handle_actions(stack_a, stack_b, "sa");
 }

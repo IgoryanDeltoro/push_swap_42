@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igoryan <igoryan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibondarc <ibondarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:48:40 by ibondarc          #+#    #+#             */
-/*   Updated: 2024/11/13 22:21:35 by igoryan          ###   ########.fr       */
+/*   Updated: 2024/12/04 12:07:23 by ibondarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	whitespace(const char *str, int *idx)
+int	whitespaces(const char *str, int *idx)
 {
 	int	i;
 	int	sign;
@@ -34,12 +34,12 @@ int	whitespace(const char *str, int *idx)
 
 int	ft_atoi(const char *nptr)
 {
-	int i;
-	long sign;
-	long result;
+	int		i;
+	long	sign;
+	long	result;
 
 	result = 0;
-	sign = whitespace(nptr, &i);
+	sign = whitespaces(nptr, &i);
 	while (nptr[i])
 	{
 		if (!(nptr[i] >= 48 && nptr[i] <= 57))
@@ -52,6 +52,6 @@ int	ft_atoi(const char *nptr)
 	}
 	result *= sign;
 	if (result < INT_MIN || result > INT_MAX)
-        return(0);
+		return (0);
 	return (result);
 }

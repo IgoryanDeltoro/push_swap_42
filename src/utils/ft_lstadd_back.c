@@ -6,7 +6,7 @@
 /*   By: ibondarc <ibondarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:43:21 by ibondarc          #+#    #+#             */
-/*   Updated: 2024/11/13 15:52:06 by ibondarc         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:08:22 by ibondarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list *last;
+	t_list	*last;
 
 	if (!new)
 		return ;
@@ -25,4 +25,5 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 	last = ft_lstlast(*lst);
 	last->next = new;
+	new->prev = last;
 }

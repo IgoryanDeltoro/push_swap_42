@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sb.c                                            :+:      :+:    :+:   */
+/*   is_stack_sorted.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igoryan <igoryan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibondarc <ibondarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 02:21:06 by igoryan           #+#    #+#             */
-/*   Updated: 2024/11/15 20:32:12 by igoryan          ###   ########.fr       */
+/*   Created: 2024/11/27 12:23:24 by ibondarc          #+#    #+#             */
+/*   Updated: 2024/12/04 11:46:41 by ibondarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void    ft_sb(t_list **lst_b)
+int	is_stack_sorted(t_list *stack)
 {
-    int temp;
-    
-    if (!lst_b || !(*lst_b) || !(*lst_b)->next)
-        return ;
-    printf("sb\n");
-    temp = (*lst_b)->data;
-    (*lst_b)->data = (*lst_b)->next->data;
-    (*lst_b)->next->data = temp;
+	if (!stack || !stack->next)
+		return (0);
+	while (stack->next)
+	{
+		if (stack->value > stack->next->value)
+			return (1);
+		stack = stack->next;
+	}
+	return (0);
 }

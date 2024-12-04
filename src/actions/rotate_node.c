@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   rotate_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ibondarc <ibondarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 16:34:32 by ibondarc          #+#    #+#             */
-/*   Updated: 2024/11/13 17:00:07 by ibondarc         ###   ########.fr       */
+/*   Created: 2024/11/15 16:48:26 by ibondarc          #+#    #+#             */
+/*   Updated: 2024/12/03 17:19:25 by ibondarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-int	ft_isdigit(int ac, char **av)
+void	rotate_node(t_list **stack, char *str, bool flag)
 {
-    int i;
-    int j;
-        
-    i = 1;
-    while (i < ac)
-    {
-        j = 0;
-        while (av[i][j])
-        {
-            if (av[i][j] == '-')
-                j++;
-            if (!(av[i][j] >= 48 && av[i][j] <= 57))
-		        return (0);
-            j++;
-        }
-        i++;
-    }
-	return (1);
+	t_list	*first;
+	t_list	*last;
+
+	if (!(*stack) || !(*stack)->next)
+		return ;
+	first = *stack;
+	last = *stack;
+	while (last->next)
+		last = last->next;
+	*stack = first->next;
+	(*stack)->prev = NULL;
+	last->next = first;
+	first->prev = last;
+	first->next = NULL;
+	if (flag)
+		print_actions(str);
 }

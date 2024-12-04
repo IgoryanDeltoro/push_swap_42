@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rra.c                                           :+:      :+:    :+:   */
+/*   reverse_rotate_node.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igoryan <igoryan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibondarc <ibondarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 16:48:26 by igoryan           #+#    #+#             */
-/*   Updated: 2024/11/15 18:41:15 by igoryan          ###   ########.fr       */
+/*   Created: 2024/12/02 15:18:58 by ibondarc          #+#    #+#             */
+/*   Updated: 2024/12/02 18:53:05 by ibondarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void	ft_rra(t_list **lst_a)
+void	reverse_rotate_node(t_list **stack, char *str, bool flag)
 {
 	t_list	*last;
 	t_list	*before_last;
-	
-	if (!(*lst_a) || !(*lst_a)->next)
+
+	if (!(*stack) || !(*stack)->next)
 		return ;
-    printf("rra\n");
-	last = *lst_a;
+	last = *stack;
 	before_last = NULL;
 	while (last->next != NULL)
 	{
@@ -28,6 +27,10 @@ void	ft_rra(t_list **lst_a)
 		last = last->next;
 	}
 	before_last->next = NULL;
-	last->next = *lst_a;
-	*lst_a = last;
+	(*stack)->prev = last;
+	last->next = *stack;
+	last->prev = NULL;
+	*stack = last;
+	if (flag)
+		print_actions(str);
 }

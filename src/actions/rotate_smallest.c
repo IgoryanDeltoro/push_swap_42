@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_rrr.c                                           :+:      :+:    :+:   */
+/*   rotate_smallest.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igoryan <igoryan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ibondarc <ibondarc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/15 16:48:14 by igoryan           #+#    #+#             */
-/*   Updated: 2024/11/15 18:41:33 by igoryan          ###   ########.fr       */
+/*   Created: 2024/11/19 17:44:57 by ibondarc          #+#    #+#             */
+/*   Updated: 2024/12/04 12:05:07 by ibondarc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/push_swap.h"
 
-void    ft_rrr(t_list **lst_a, t_list **lst_b)
+void	rotate_smallest(t_list **stack_a, t_list **stack_b, t_list *smallest)
 {
-    if (!(*lst_a) || !(*lst_b) || !lst_a || !lst_b)
-		return ;
-    printf("rrr\n");
-	ft_rra(lst_a);
-	ft_rrb(lst_b);
+	if (smallest->before_median)
+	{
+		while (*stack_a != smallest)
+			handle_actions(stack_a, stack_b, "ra");
+	}
+	else
+	{
+		while (*stack_a != smallest)
+			handle_actions(stack_a, stack_b, "rra");
+	}
 }
